@@ -1,0 +1,64 @@
+.ToDoForm {
+  margin: 40px auto;
+  position: relative;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 11px;
+    max-width: 370px;
+
+    @media (max-width: 460px) {
+      flex-direction: column;
+    }
+  }
+
+  input {
+    border: none;
+    border-radius: 10px 0 0 10px;
+    padding: 10px 35px 10px 10px;
+    transition: 0.3s;
+    font-size: 14px;
+    border-right: 1px;
+    width: 100%;
+
+    @media (max-width: 460px) {
+      border-radius: 10px;
+    }
+  }
+
+  .clear {
+    position: absolute;
+    top: 20%;
+    right: 27%;
+    opacity: 0.3;
+    cursor: pointer;
+    transition: 0.4s;
+    will-change: transform;
+
+    &:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+
+  button {
+    border: none;
+    padding: 0 10px;
+    border-radius: 0 10px 10px 0;
+    transition: 0.4s;
+    cursor: pointer;
+    width: 30%;
+
+    @media (max-width: 460px) {
+      padding: 10px 10px;
+      border-radius: 0 0 10px 10px;
+      width: 100%;
+    }
+
+    &:hover {
+      background-color: rgb(187, 187, 187);
+    }
+  }
+}

@@ -1,0 +1,19 @@
+ul {
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+    cursor: grab;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: rgb(212, 212, 212);
+    }
+
+    &.active {
+      background: rgb(250, 184, 97);
+    }
+  }
+}

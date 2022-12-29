@@ -1,0 +1,15 @@
+li {
+  border-radius: 10px;
+
+  button {
+    transition: 0.4s;
+    background: transparent;
+    width: 20px;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.3);
+    }
+  }
+}
