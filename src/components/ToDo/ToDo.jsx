@@ -32,11 +32,6 @@ const ToDo = () => {
   //     task: 'задача № 4',
   //     category: 4,
   //   },
-  //   {
-  //     id: '4',
-  //     task: 'задача № 5',
-  //     category: 5,
-  //   },
   // ]);
 
   const dragStartHandler = (e, card) => {
@@ -49,7 +44,6 @@ const ToDo = () => {
   };
   const dragOverHandler = (e) => {
     e.preventDefault();
-    e.target.style.background = 'grey';
   };
 
   const dropHandler = (e, card) => {
@@ -68,7 +62,7 @@ const ToDo = () => {
         })
       )
     );
-    e.target.style.background = 'grey';
+    console.log(items);
   };
 
   const sortCards = (a, b) => {
@@ -79,9 +73,11 @@ const ToDo = () => {
     }
   };
 
+  const itemsSort = [...items].sort(sortCards)
+
   return (
     <ul>
-      {items.sort(sortCards).map((card) => (
+      {itemsSort.map((card) => (
         <ToDoItem
           card={card}
           dragStartHandler={dragStartHandler}
