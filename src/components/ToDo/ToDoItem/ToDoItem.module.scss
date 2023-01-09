@@ -1,6 +1,15 @@
 li {
   border-radius: 10px;
 
+  .complited {
+    transition: 0.4s;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
   button {
     transition: 0.4s;
     background: transparent;

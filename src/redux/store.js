@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import ToDo from './ToDoSlices/ToDoSlices'
+import Home from './HomeSlices/HomeSlices'
+import Archive from './ArchiveSlices/ArchiveSlices'
+import Basket from './BasketSlices/BasketSlices'
 
 export const store = configureStore({
   reducer: {
-    ToDo
+    Home,
+    Archive,
+    Basket
   },
 })

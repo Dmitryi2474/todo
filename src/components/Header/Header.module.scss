@@ -1,16 +1,32 @@
-.ToDoForm {
-  margin: 40px auto;
-  position: relative;
-
-  div {
+.Header {
+  .InputWrapper {
     display: flex;
     flex-direction: row;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 11px;
     max-width: 370px;
+    margin: 30px auto;
+    position: relative;
 
     @media (max-width: 460px) {
       flex-direction: column;
+    }
+
+    &_disabled {
+      opacity: 0;
+      cursor: none;
+
+      input {
+        cursor: default;
+      }
+
+      button {
+        cursor: default;
+      }
+
+      .clear {
+        cursor: default;
+      }
     }
   }
 
@@ -59,6 +75,31 @@
 
     &:hover {
       background-color: rgb(187, 187, 187);
+    }
+  }
+
+  .NavList {
+    display: flex;
+    margin: 30px 0;
+    .item {
+      margin: 0 20px 0 0;
+      border: none;
+      padding: 0;
+
+      a {
+        border-radius: 10px;
+        padding: 10px 15px;
+        background-color: rgb(204, 203, 203);
+        transition: 0.4s;
+
+        &:hover {
+          background-color: rgb(233, 233, 233);
+        }
+
+        &.active {
+          background-color: rgb(255, 161, 74);
+        }
+      }
     }
   }
 }

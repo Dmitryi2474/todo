@@ -1,38 +1,15 @@
 import { useState } from 'react';
-import { selectItems, setItems } from '../../redux/ToDoSlices/ToDoSlices';
+import { selectItems, setItems } from '../../redux/HomeSlices/HomeSlices';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ToDoItem from './ToDoItem/ToDoItem';
 
-import './ToDo.module.scss';
+import classes from './ToDo.module.scss';
 
 const ToDo = () => {
   const { items } = useSelector(selectItems);
   const [currentCard, setCurrentCard] = useState(null);
   const disaptch = useDispatch();
-
-  // const [cardList, setCardList] = useState([
-  //   {
-  //     id: '0',
-  //     task: 'задача № 1',
-  //     category: 1,
-  //   },
-  //   {
-  //     id: '1',
-  //     task: 'задача № 2',
-  //     category: 2,
-  //   },
-  //   {
-  //     id: '2',
-  //     task: 'задача № 3',
-  //     category: 3,
-  //   },
-  //   {
-  //     id: '3',
-  //     task: 'задача № 4',
-  //     category: 4,
-  //   },
-  // ]);
 
   const dragStartHandler = (e, card) => {
     console.log('drag', card);
@@ -62,7 +39,6 @@ const ToDo = () => {
         })
       )
     );
-    console.log(items);
   };
 
   const sortCards = (a, b) => {
@@ -76,7 +52,7 @@ const ToDo = () => {
   const itemsSort = [...items].sort(sortCards)
 
   return (
-    <ul>
+    <ul className={classes.TodoList}>
       {itemsSort.map((card) => (
         <ToDoItem
           card={card}

@@ -1,10 +1,30 @@
-import { useRef } from 'react';
-import { useState } from 'react';
-import classes from './ToDoForm.module.scss';
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectItems, setItems } from "../../redux/HomeSlices/HomeSlices";
+// import { useLocation } from 'react-router';
+import clsx from "clsx";
 
-function ToDoForm({ addTask }) {
-  const [userInput, setUserInput] = useState('');
+import Categories from "../Categories/Categories";
+
+import classes from "./Header.module.scss";
+import { useLocation } from "react-router-dom";
+
+const Header = () => {
+  const { pathname } = useLocation();
+  const [userInput, setUserInput] = useState("");
+  const { items } = useSelector(selectItems);
+  const dispatch = useDispatch();
   const inputRef = useRef(null);
+
+  const addTask = (userInput) => {
+    if (userInput) {
+      const newItem = {
+        id: Math.random().toString(15).substring(2, 9),
+        task: userInput,
+      };
+      dispatch(setItems([...items, newItem]));
+    }
+  };
 
   const handleChange = (e) => {
     setUserInput(e.currentTarget.value);
@@ -13,18 +33,26 @@ function ToDoForm({ addTask }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addTask(userInput);
-    setUserInput('');
+    setUserInput("");
   };
 
   const onClickClear = () => {
-    setUserInput('');
+    setUserInput("");
     inputRef.current?.focus();
   };
 
   return (
-    <section className={classes.ToDoForm}>
+    <section className={classes.Header}>
+      <header>
+        <h1>Список задач:{items.length}</h1>
+      </header>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div
+          className={clsx(
+            classes.InputWrapper,
+            pathname !== "/" && classes.InputWrapper_disabled
+          )}
+        >
           <input
             ref={inputRef}
             value={userInput}
@@ -53,8 +81,9 @@ function ToDoForm({ addTask }) {
           <button>Сохранить</button>
         </div>
       </form>
+      <Categories />
     </section>
   );
-}
+};
 
-export default ToDoForm;
+export default Header;

@@ -1,6 +1,8 @@
-import { useDispatch } from 'react-redux';
-import { removeTask } from '../../../redux/ToDoSlices/ToDoSlices';
-import './ToDoItem.module.scss';
+import { useDispatch } from "react-redux";
+import { addBasket } from "../../../redux/BasketSlices/BasketSlices";
+import { removeTask } from "../../../redux/HomeSlices/HomeSlices";
+import classes from "./ToDoItem.module.scss";
+import { addArchive } from "../../../redux/ArchiveSlices/ArchiveSlices";
 
 const ToDoItem = ({
   id,
@@ -13,10 +15,21 @@ const ToDoItem = ({
 }) => {
   const dispatch = useDispatch();
 
+  const item = {
+    id,
+    task,
+  };
+
   const onClickRemove = () => {
-    if (window.confirm('удалить?')) {
+    if (window.confirm("переместить в корзину?")) {
       dispatch(removeTask(id));
     }
+    dispatch(addBasket(item));
+  };
+
+  const onClickAdd = () => {
+    dispatch(addArchive(item));
+    dispatch(removeTask(id));
   };
 
   return (
@@ -30,6 +43,9 @@ const ToDoItem = ({
         onDrop={(e) => dropHandler(e, card)}
       >
         нужно выполнить : <span>{task}</span>
+        <span className={classes.complited} onClick={onClickAdd}>
+          OK
+        </span>
         <button onClick={onClickRemove}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -1,0 +1,19 @@
+.cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0;
+
+  h2 {
+    margin-bottom: 30px;
+  }
+
+  button {
+    margin-bottom: 50px;
+  }
+
+  img {
+    max-width: 500px;
+  }
+}
