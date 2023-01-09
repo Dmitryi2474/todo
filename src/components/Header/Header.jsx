@@ -1,13 +1,12 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectItems, setItems } from "../../redux/HomeSlices/HomeSlices";
-// import { useLocation } from 'react-router';
+import { useLocation } from "react-router-dom";
 import clsx from "clsx";
 
 import Categories from "../Categories/Categories";
 
 import classes from "./Header.module.scss";
-import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -15,6 +14,15 @@ const Header = () => {
   const { items } = useSelector(selectItems);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem("cart", json);
+    }
+    isMounted.current = true;
+  }, [items]);
 
   const addTask = (userInput) => {
     if (userInput) {

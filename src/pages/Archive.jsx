@@ -25,7 +25,7 @@ const Archive = () => {
         {items.map((obj) => (
           <li key={obj.id}>
             выполнено: {obj.task}
-            <span onClick={() => onClickBack()}>Back</span>
+            <span onClick={() => onClickBack(obj.id)}>Back</span>
           </li>
         ))}
       </ul>

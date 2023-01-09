@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  items: [],
+  items: JSON.parse(localStorage.getItem('cart') || []),
 };
 
 export const BasketSlice = createSlice({
@@ -19,11 +19,17 @@ export const BasketSlice = createSlice({
         });
       }
     },
+    removeTaskBask(state, action) {
+      state.items = state.items.filter((obj) => obj.id !== action.payload);
+    },
+    clearItem(state) {
+      state.items = [];
+    },
   },
 });
 
 export const selectItems = (state) => state.Basket;
 
-export const { addBasket } = BasketSlice.actions;
+export const { addBasket, removeTaskBask, clearItem } = BasketSlice.actions;
 
 export default BasketSlice.reducer;
