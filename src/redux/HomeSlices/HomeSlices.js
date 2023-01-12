@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const FetchTodo = createAsyncThunk("odo/fetchTodoStatus", async () => {
+export const FetchTodo = createAsyncThunk("todo/fetchTodoStatus", async () => {
   const { data } = await axios.get(
-    "https://6363c19237f2167d6f828690.mockapi.io/todo"
+    "https://63bfefe9e262345656f3dc05.mockapi.io/todo"
   );
   return data;
 });
 
 const initialState = {
-  items: [],
+  items: JSON.parse(localStorage.getItem("cart") || "[]"),
   staus: "loading",
   active: 0,
 };
@@ -18,7 +18,7 @@ export const HomeSlice = createSlice({
   name: "Home",
   initialState,
   reducers: {
-    addHome (state, action) {
+    addHome(state, action) {
       const findItem = state.items.find((obj) => obj.id === action.payload.id);
       if (findItem) {
         findItem.count++;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import classes from "./Categories.module.scss";
@@ -7,9 +7,9 @@ const Categories = () => {
   const [active, setActive] = useState(0);
 
   const links = [
-    { link: "/", title: "home" },
-    { link: "/archive", title: "archive" },
-    { link: "/basket", title: "basket" },
+    { link: "/", title: "Актуальные" },
+    { link: "/archive", title: "Архив" },
+    { link: "/basket", title: "Корзина" },
   ];
 
   const onCnangeCategoryId = (id) => {
@@ -27,7 +27,6 @@ const Categories = () => {
           >
             {obj.title}
           </Link>
-          <span>{}</span>
         </li>
       ))}
     </ul>

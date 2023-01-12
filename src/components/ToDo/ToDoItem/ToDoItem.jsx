@@ -3,21 +3,25 @@ import { addBasket } from "../../../redux/BasketSlices/BasketSlices";
 import { removeTask } from "../../../redux/HomeSlices/HomeSlices";
 import classes from "./ToDoItem.module.scss";
 import { addArchive } from "../../../redux/ArchiveSlices/ArchiveSlices";
+import { useState } from "react";
 
 const ToDoItem = ({
   id,
   task,
-  card,
+  title,
+  items,
   dragStartHandler,
   dargEndHandler,
   dragOverHandler,
   dropHandler,
 }) => {
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
 
   const item = {
     id,
     task,
+    title,
   };
 
   const onClickRemove = () => {
@@ -36,32 +40,44 @@ const ToDoItem = ({
     <>
       <li
         draggable={true}
-        onDragStart={(e) => dragStartHandler(e, card)}
+        onDragStart={(e) => dragStartHandler(e, items)}
         onDragLeave={(e) => dargEndHandler(e)}
         onDragEnd={(e) => dargEndHandler(e)}
         onDragOver={(e) => dragOverHandler(e)}
-        onDrop={(e) => dropHandler(e, card)}
+        onDrop={(e) => dropHandler(e, items)}
       >
-        нужно выполнить : <span>{task}</span>
-        <span className={classes.complited} onClick={onClickAdd}>
-          OK
-        </span>
-        <button onClick={onClickRemove}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            height="24"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            width="24"
-          >
-            <line x1="18" x2="6" y1="6" y2="18" />
-            <line x1="6" x2="18" y1="6" y2="18" />
-          </svg>
-        </button>
+        <div className={classes.itemHead}>
+          <div className={classes.task}>
+            нужно выполнить : <span>{items.title}</span>
+          </div>
+          <div>
+            <img
+              onClick={() => setOpen(!open)}
+              className={open ? `${classes.imgArrow}` : ''}
+              src="../../../../img/arrow.webp"
+              alt=""
+            />
+            <img
+              className={classes.imgArchive}
+              src="../../../../img/archive.webp"
+              alt=""
+              title="добавить в архив"
+              onClick={onClickAdd}
+            />
+            <button onClick={onClickRemove}>
+              <img
+                src="../../../../img/basket.webp"
+                alt=""
+                title="добавить в корзину"
+              />
+            </button>
+          </div>
+        </div>
+        {open && (
+          <div className={classes.itemHidden}>
+            <span>{items.task}</span>
+          </div>
+        )}
       </li>
     </>
   );

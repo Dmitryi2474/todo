@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { selectItems, setItems } from '../../redux/HomeSlices/HomeSlices';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from "react";
+import { selectItems, setItems } from "../../redux/HomeSlices/HomeSlices";
+import { useDispatch, useSelector } from "react-redux";
 
-import ToDoItem from './ToDoItem/ToDoItem';
+import ToDoItem from "./ToDoItem/ToDoItem";
 
-import classes from './ToDo.module.scss';
+import classes from "./ToDo.module.scss";
 
 const ToDo = () => {
   const { items } = useSelector(selectItems);
@@ -12,19 +12,17 @@ const ToDo = () => {
   const disaptch = useDispatch();
 
   const dragStartHandler = (e, card) => {
-    console.log('drag', card);
     setCurrentCard(card);
   };
 
   const dargEndHandler = (e) => {
-    e.target.style.background = 'white';
+    e.target.style.background = "white";
   };
   const dragOverHandler = (e) => {
     e.preventDefault();
   };
 
   const dropHandler = (e, card) => {
-    console.log('drop', card);
     e.preventDefault();
     disaptch(
       setItems(
@@ -49,19 +47,19 @@ const ToDo = () => {
     }
   };
 
-  const itemsSort = [...items].sort(sortCards)
+  const itemsSort = [...items].sort(sortCards);
 
   return (
     <ul className={classes.TodoList}>
-      {itemsSort.map((card) => (
+      {itemsSort.map((items) => (
         <ToDoItem
-          card={card}
+          key={items.id}
+          items={items}
           dragStartHandler={dragStartHandler}
           dargEndHandler={dargEndHandler}
           dragOverHandler={dragOverHandler}
           dropHandler={dropHandler}
-          key={card.id}
-          {...card}
+          {...items}
         />
       ))}
     </ul>

@@ -1,4 +1,3 @@
-import React from "react";
 import classes from "./ItemEmpty.module.scss";
 
 const ItemEmpty = ({title}) => {

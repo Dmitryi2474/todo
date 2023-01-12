@@ -14,20 +14,18 @@ const Header = () => {
   const { items } = useSelector(selectItems);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  const isMounted = useRef(false);
 
   useEffect(() => {
-    if (isMounted.current) {
-      const json = JSON.stringify(items);
-      localStorage.setItem("cart", json);
-    }
-    isMounted.current = true;
-  }, [items]);
+    const currentCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const json = JSON.stringify(currentCart);
+    localStorage.setItem("cart", json);
+  }, []);
 
   const addTask = (userInput) => {
     if (userInput) {
       const newItem = {
         id: Math.random().toString(15).substring(2, 9),
+        title: 'Добавленая задача ',
         task: userInput,
       };
       dispatch(setItems([...items, newItem]));

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  items: JSON.parse(localStorage.getItem('cart') || []),
+  items: JSON.parse(localStorage.getItem("cart") || "[]"),
 };
 
 export const BasketSlice = createSlice({
@@ -20,10 +20,13 @@ export const BasketSlice = createSlice({
       }
     },
     removeTaskBask(state, action) {
-      state.items = state.items.filter((obj) => obj.id !== action.payload);
+      const filteredTask = state.items.filter((obj) => obj.id !== action.payload);
+      state.items = filteredTask;
+      localStorage.setItem("cart", filteredTask);
     },
     clearItem(state) {
       state.items = [];
+      localStorage.setItem("cart", "[]");
     },
   },
 });
