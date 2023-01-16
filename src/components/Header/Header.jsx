@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectItems, setItems } from "../../redux/HomeSlices/HomeSlices";
+import { selectItemsHome, setItems } from "../../redux/HomeSlices/HomeSlices";
 import { useLocation } from "react-router-dom";
 import clsx from "clsx";
 
@@ -11,24 +11,24 @@ import classes from "./Header.module.scss";
 const Header = () => {
   const { pathname } = useLocation();
   const [userInput, setUserInput] = useState("");
-  const { items } = useSelector(selectItems);
+  const { itemsHome } = useSelector(selectItemsHome);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
 
-  useEffect(() => {
-    const currentCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const json = JSON.stringify(currentCart);
-    localStorage.setItem("cart", json);
-  }, []);
+  // useEffect(() => {
+  //   const currentCart = JSON.parse(localStorage.getItem("cart") || "[]");
+  //   const json = JSON.stringify(currentCart);
+  //   localStorage.setItem("cart", json);
+  // }, []);
 
   const addTask = (userInput) => {
     if (userInput) {
       const newItem = {
         id: Math.random().toString(15).substring(2, 9),
-        title: 'Добавленая задача ',
+        title: "Добавленая задача ",
         task: userInput,
       };
-      dispatch(setItems([...items, newItem]));
+      dispatch(setItems([...itemsHome, newItem]));
     }
   };
 
@@ -50,7 +50,9 @@ const Header = () => {
   return (
     <section className={classes.Header}>
       <header>
-        <h1>Список задач:{items.length}</h1>
+        <h1>
+          Список задач:{itemsHome.length}
+        </h1>
       </header>
       <form onSubmit={handleSubmit}>
         <div

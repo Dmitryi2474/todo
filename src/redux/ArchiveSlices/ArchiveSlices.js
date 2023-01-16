@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  items: JSON.parse(localStorage.getItem("cart") || "[]"),
+  // items: JSON.parse(localStorage.getItem("cart") || "[]"),
+  itemsArchive: [],
 };
 
 export const ArchiveSlice = createSlice({
@@ -9,27 +10,27 @@ export const ArchiveSlice = createSlice({
   initialState,
   reducers: {
     addArchive(state, action) {
-      const findItem = state.items.find((obj) => obj.id === action.payload);
+      const findItem = state.itemsArchive.find((obj) => obj.id === action.payload);
       if (findItem) {
         findItem.count++;
       } else {
-        state.items.push({
+        state.itemsArchive.push({
           ...action.payload,
           count: 1,
         });
       }
     },
     removeTaskArchives(state, action) {
-      const filteredTask = state.items.filter(
+      const filteredTask = state.itemsArchive.filter(
         (obj) => obj.id !== action.payload
       );
-      state.items = filteredTask;
+      state.itemsArchive = filteredTask;
       localStorage.setItem("cart", filteredTask);
     },
   },
 });
 
-export const selectItems = (state) => state.Archive;
+export const selectItemsArchive = (state) => state.Archive;
 
 export const { addArchive, removeTaskArchives } = ArchiveSlice.actions;
 

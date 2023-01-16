@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { selectItems, setItems } from "../../redux/HomeSlices/HomeSlices";
+import { selectItemsHome, setItems } from "../../redux/HomeSlices/HomeSlices";
 import { useDispatch, useSelector } from "react-redux";
 
 import ToDoItem from "./ToDoItem/ToDoItem";
@@ -7,7 +7,7 @@ import ToDoItem from "./ToDoItem/ToDoItem";
 import classes from "./ToDo.module.scss";
 
 const ToDo = () => {
-  const { items } = useSelector(selectItems);
+  const { itemsHome } = useSelector(selectItemsHome);
   const [currentCard, setCurrentCard] = useState(null);
   const disaptch = useDispatch();
 
@@ -26,7 +26,7 @@ const ToDo = () => {
     e.preventDefault();
     disaptch(
       setItems(
-        items.map((c) => {
+        itemsHome.map((c) => {
           if (c.id === card.id) {
             return { ...c, category: currentCard.category };
           }
@@ -47,7 +47,7 @@ const ToDo = () => {
     }
   };
 
-  const itemsSort = [...items].sort(sortCards);
+  const itemsSort = [...itemsHome].sort(sortCards);
 
   return (
     <ul className={classes.TodoList}>

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { FetchTodo, selectItems } from "../redux/HomeSlices/HomeSlices";
+import { FetchTodo, selectItemsHome } from "../redux/HomeSlices/HomeSlices";
 import ToDo from "../components/ToDo/ToDo";
 import Preloader from "../components/Preloader/preloader";
 
@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import Error from "../components/Error/Error";
 
 const Home = () => {
-  const { status, items } = useSelector(selectItems);
+  const { status, itemsHome } = useSelector(selectItemsHome);
   const dispatch = useDispatch();
 
   const getTodo = async () => {
@@ -16,13 +16,11 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (items.length === 0) {
+    if (itemsHome.length === 0) {
       getTodo();
     }
     // eslint-disable-next-line
   }, []);
-
-  console.log(items)
 
   return (
     <>

@@ -9,7 +9,7 @@ export const FetchTodo = createAsyncThunk("todo/fetchTodoStatus", async () => {
 });
 
 const initialState = {
-  items: JSON.parse(localStorage.getItem("cart") || "[]"),
+  itemsHome:[],
   staus: "loading",
   active: 0,
 };
@@ -19,43 +19,43 @@ export const HomeSlice = createSlice({
   initialState,
   reducers: {
     addHome(state, action) {
-      const findItem = state.items.find((obj) => obj.id === action.payload.id);
+      const findItem = state.itemsHome.find((obj) => obj.id === action.payload.id);
       if (findItem) {
         findItem.count++;
       } else {
-        state.items.push({
+        state.itemsHome.push({
           ...action.payload,
           count: 1,
         });
       }
     },
     setActive(state, action) {
-      state.items = action.payload;
+      state.itemsHome = action.payload;
     },
     setItems(state, action) {
-      state.items = action.payload;
+      state.itemsHome = action.payload;
     },
     removeTask(state, action) {
-      state.items = state.items.filter((obj) => obj.id !== action.payload);
+      state.itemsHome = state.itemsHome.filter((obj) => obj.id !== action.payload);
     },
   },
   extraReducers: {
     [FetchTodo.pending]: (state) => {
       state.status = "loading";
-      state.items = [];
+      state.itemsHome = [];
     },
     [FetchTodo.fulfilled]: (state, action) => {
       state.status = "success";
-      state.items = action.payload;
+      state.itemsHome = action.payload;
     },
     [FetchTodo.rejected]: (state) => {
       state.status = "error";
-      state.items = [];
+      state.itemsHome = [];
     },
   },
 });
 
-export const selectItems = (state) => state.Home;
+export const selectItemsHome = (state) => state.Home;
 
 export const { addHome, setActive, setItems, removeTask, status } =
   HomeSlice.actions;

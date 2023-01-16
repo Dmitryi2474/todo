@@ -3,21 +3,20 @@ import ItemEmpty from "../components/ItemEmpty/ItemEmpty";
 import {
   clearItem,
   removeTaskBask,
-  selectItems,
+  selectItemsBasket,
 } from "../redux/BasketSlices/BasketSlices";
 import { addHome } from "../redux/HomeSlices/HomeSlices";
 
+import Cart from "../components/Cart/Cart";
+
 import classes from "../components/ToDo/ToDoItem/ToDoItem.module.scss";
 
-import { useState } from "react";
-
 const Basket = () => {
-  const [open, setOpen] = useState(false);
-  const { items } = useSelector(selectItems);
+  const { itemsBasket } = useSelector(selectItemsBasket);
   const dispatch = useDispatch();
 
   const onClickBack = (id) => {
-    dispatch(addHome(...items));
+    dispatch(addHome(...itemsBasket));
     dispatch(removeTaskBask(id));
   };
 
@@ -31,7 +30,7 @@ const Basket = () => {
     }
   };
 
-  if (!items.length) {
+  if (!itemsBasket.length) {
     return <ItemEmpty title={"корзина пустая!"} />;
   }
 
@@ -42,41 +41,13 @@ const Basket = () => {
       </div>
 
       <ul>
-        {items.map((obj) => (
-          <li key={obj.id}>
-            <div className={classes.itemHead}>
-              <div className={classes.task}>
-                нужно выполнить : <span>{obj.title}</span>
-              </div>
-              <div>
-                <img
-                  onClick={() => setOpen(!open)}
-                  className={open ? `${classes.imgArrow}` : ""}
-                  src="../../../../img/arrow.webp"
-                  alt=""
-                />
-                <img
-                  className={classes.imgArchive}
-                  src="../../../../img/back.webp"
-                  alt=""
-                  title="вернуть в актуальные"
-                  onClick={() => onClickBack(obj.id)}
-                />
-                <button onClick={() => onClickRemove(obj.id)}>
-                  <img
-                    src="../../../../img/basket.webp"
-                    alt=""
-                    title="удалить из архива"
-                  />
-                </button>
-              </div>
-            </div>
-            {open && (
-              <div className={classes.itemHidden}>
-                <span>{obj.task}</span>
-              </div>
-            )}
-          </li>
+        {itemsBasket.map((item) => (
+          <Cart
+            key={item.id}
+            onClickBack={onClickBack}
+            onClickRemove={onClickRemove}
+            {...item}
+          />
         ))}
       </ul>
     </>

@@ -8,8 +8,8 @@ import { useState } from "react";
 const ToDoItem = ({
   id,
   task,
-  title,
   items,
+  title,
   dragStartHandler,
   dargEndHandler,
   dragOverHandler,
@@ -53,7 +53,7 @@ const ToDoItem = ({
           <div>
             <img
               onClick={() => setOpen(!open)}
-              className={open ? `${classes.imgArrow}` : ''}
+              className={open ? `${classes.imgArrow}` : ""}
               src="../../../../img/arrow.webp"
               alt=""
             />
