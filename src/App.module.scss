@@ -27,12 +27,70 @@
     margin-bottom: 20px;
     cursor: grab;
     transition: 0.3s;
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
 
-    &:hover {
+    &::before {
+      content: "";
+      position: absolute;
       background-color: rgb(212, 212, 212);
+      width: 0;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-radius: 10px;
+      z-index: -1;
+      transition: 0.4s;
     }
 
     &.active {
+      background: rgb(250, 184, 97);
+      &:hover {
+        &::before {
+          width: 0;
+        }
+      }
+    }
+
+    &:hover {
+      &::before {
+        width: 100%;
+        right: 0;
+      }
+    }
+
+    .task {
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: 15px;
+      }
+    }
+
+    .itemHidden {
+      margin-top: 20px;
+    }
+
+    .itemHead {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        transition: 0.4s;
+        background: transparent;
+        width: 20px;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .active {
       background: rgb(250, 184, 97);
     }
   }

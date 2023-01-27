@@ -1,9 +1,13 @@
 import { useDispatch } from "react-redux";
 import { addBasket } from "../../../redux/BasketSlices/BasketSlices";
 import { removeTask } from "../../../redux/HomeSlices/HomeSlices";
-import classes from "./ToDoItem.module.scss";
 import { addArchive } from "../../../redux/ArchiveSlices/ArchiveSlices";
 import { useState } from "react";
+
+import classes from "../../../App.module.scss";
+import BtnBasket from "../../../ui/BtnBasket";
+import BtnExpand from "../../../ui/BtnExpand";
+import BtnArchive from "../../../ui/BtnArchive";
 
 const ToDoItem = ({
   id,
@@ -36,9 +40,14 @@ const ToDoItem = ({
     dispatch(removeTask(id));
   };
 
+  const openItem = () => {
+    setOpen(!open)
+  }
+
   return (
     <>
       <li
+        className={open ? `${classes.active}` : ""}
         draggable={true}
         onDragStart={(e) => dragStartHandler(e, items)}
         onDragLeave={(e) => dargEndHandler(e)}
@@ -51,26 +60,9 @@ const ToDoItem = ({
             нужно выполнить : <span>{items.title}</span>
           </div>
           <div>
-            <img
-              onClick={() => setOpen(!open)}
-              className={open ? `${classes.imgArrow}` : ""}
-              src="../../../../img/arrow.webp"
-              alt=""
-            />
-            <img
-              className={classes.imgArchive}
-              src="../../../../img/archive.webp"
-              alt=""
-              title="добавить в архив"
-              onClick={onClickAdd}
-            />
-            <button onClick={onClickRemove}>
-              <img
-                src="../../../../img/basket.webp"
-                alt=""
-                title="добавить в корзину"
-              />
-            </button>
+            <BtnExpand open={open} openItem={openItem} />
+            <BtnArchive onClickAdd={onClickAdd}/>
+            <BtnBasket onClickRemove={onClickRemove} />
           </div>
         </div>
         {open && (

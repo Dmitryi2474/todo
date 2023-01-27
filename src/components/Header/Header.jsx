@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectItemsHome, setItems } from "../../redux/HomeSlices/HomeSlices";
 import { useLocation } from "react-router-dom";
@@ -14,12 +14,15 @@ const Header = () => {
   const { itemsHome } = useSelector(selectItemsHome);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
+  const isMounted = useRef(false);
 
-  // useEffect(() => {
-  //   const currentCart = JSON.parse(localStorage.getItem("cart") || "[]");
-  //   const json = JSON.stringify(currentCart);
-  //   localStorage.setItem("cart", json);
-  // }, []);
+  useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(itemsHome);
+      localStorage.setItem("cart", json);
+    }
+    isMounted.current = true;
+  }, [itemsHome]);
 
   const addTask = (userInput) => {
     if (userInput) {
@@ -50,9 +53,7 @@ const Header = () => {
   return (
     <section className={classes.Header}>
       <header>
-        <h1>
-          Список задач:{itemsHome.length}
-        </h1>
+        <h1>Список задач:{itemsHome.length}</h1>
       </header>
       <form onSubmit={handleSubmit}>
         <div
@@ -86,7 +87,7 @@ const Header = () => {
               <line x1="6" x2="18" y1="6" y2="18" />
             </svg>
           )}
-          <button>Сохранить</button>
+          <button>Добавить</button>
         </div>
       </form>
       <Categories />

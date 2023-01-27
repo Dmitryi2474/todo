@@ -1,63 +1,7 @@
-li {
-  border-radius: 10px;
-
-  .task {
-    display: flex;
-    align-items: center;
-
-    span {
-      margin-left: 15px;
-    }
-  }
-
-  .itemHidden {
-    margin-top: 20px;
-  }
-
-  .itemHead {
-    display: flex;
-    justify-content: space-between;
-
-    img {
-      width: 24px;
-      margin-right: 40px;
-      cursor: pointer;
-      transition: 0.4s;
-
-      &.imgArrow {
-        transform: rotate(180deg);
-      }
-    }
-
-    .imgArchive {
-      max-width: 24px;
-      transition: 0.4s;
-      cursor: pointer;
-      margin-right: 40px;
-
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-
-    button {
-      transition: 0.4s;
-      background: transparent;
-      width: 20px;
-      border: none;
-      cursor: pointer;
-
-      &:hover {
-        transform: scale(1.2);
-      }
-    }
-  }
-}
-
 .clear {
   text-align: right;
   margin-bottom: 40px;
-  
+
   span {
     cursor: pointer;
     border-radius: 10px;

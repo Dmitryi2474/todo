@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ToDoItem from "./ToDoItem/ToDoItem";
 
-import classes from "./ToDo.module.scss";
-
 const ToDo = () => {
   const { itemsHome } = useSelector(selectItemsHome);
   const [currentCard, setCurrentCard] = useState(null);
@@ -16,7 +14,7 @@ const ToDo = () => {
   };
 
   const dargEndHandler = (e) => {
-    e.target.style.background = "white";
+
   };
   const dragOverHandler = (e) => {
     e.preventDefault();
@@ -50,7 +48,7 @@ const ToDo = () => {
   const itemsSort = [...itemsHome].sort(sortCards);
 
   return (
-    <ul className={classes.TodoList}>
+    <ul>
       {itemsSort.map((items) => (
         <ToDoItem
           key={items.id}

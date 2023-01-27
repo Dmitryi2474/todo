@@ -43,6 +43,7 @@ const Basket = () => {
       <ul>
         {itemsBasket.map((item) => (
           <Cart
+            hint="удалить"
             key={item.id}
             onClickBack={onClickBack}
             onClickRemove={onClickRemove}

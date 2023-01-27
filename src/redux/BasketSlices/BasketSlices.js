@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  // itemsBasket: JSON.parse(localStorage.getItem("cart") || "[]"),
-  itemsBasket: [],
+  itemsBasket: JSON.parse(localStorage.getItem("Basket")) || [],
 };
 
 export const BasketSlice = createSlice({
@@ -27,11 +26,9 @@ export const BasketSlice = createSlice({
         (obj) => obj.id !== action.payload
       );
       state.itemsBasket = filteredTask;
-      localStorage.setItem("cart", filteredTask);
     },
     clearItem(state) {
       state.itemsBasket = [];
-      localStorage.setItem("cart", "[]");
     },
   },
 });

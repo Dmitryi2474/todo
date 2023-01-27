@@ -1,0 +1,21 @@
+button {
+  margin-right: 40px;
+
+  &:last-child {
+    margin-right: 0px;
+  }
+
+  img {
+    width: 24px;
+    cursor: pointer;
+    transition: 0.4s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &.imgArrow {
+      transform: rotate(180deg);
+    }
+  }
+}

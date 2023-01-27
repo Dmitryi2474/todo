@@ -9,7 +9,7 @@ export const FetchTodo = createAsyncThunk("todo/fetchTodoStatus", async () => {
 });
 
 const initialState = {
-  itemsHome:[],
+  itemsHome: JSON.parse(localStorage.getItem("cart")) || [],
   staus: "loading",
   active: 0,
 };
@@ -19,7 +19,9 @@ export const HomeSlice = createSlice({
   initialState,
   reducers: {
     addHome(state, action) {
-      const findItem = state.itemsHome.find((obj) => obj.id === action.payload.id);
+      const findItem = state.itemsHome.find(
+        (obj) => obj.id === action.payload.id
+      );
       if (findItem) {
         findItem.count++;
       } else {
@@ -36,7 +38,9 @@ export const HomeSlice = createSlice({
       state.itemsHome = action.payload;
     },
     removeTask(state, action) {
-      state.itemsHome = state.itemsHome.filter((obj) => obj.id !== action.payload);
+      state.itemsHome = state.itemsHome.filter(
+        (obj) => obj.id !== action.payload
+      );
     },
   },
   extraReducers: {
